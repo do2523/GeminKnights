@@ -1,19 +1,21 @@
 document.getElementById("start").addEventListener("click", () => {
-  chrome.runtime.sendMessage({ action: "startSession" });
+  window.location.href = "timer.html";
 });
 
-document.getElementById("stop").addEventListener("click", () => {
-  chrome.runtime.sendMessage({ action: "stopSession" });
-
-  // fetch and display stored log data
-  chrome.storage.local.get(["activityLog"], (result) => {
-    const log = result.activityLog || [];
-    const logContainer = document.getElementById("log");
-    logContainer.innerHTML = "<h3>Session Summary:</h3>";
-    log.forEach((entry, i) => {
-      logContainer.innerHTML += `<p><strong>[${i + 1}]</strong> ${
-        entry.time
-      } - ${entry.text}</p>`;
-    });
-  });
+document.getElementById("endSession").addEventListener("click", () => {
+  window.location.href = "report.html";
 });
+
+document.getElementById("reflection").addEventListener("click", () => {
+  window.location.href = "reflection.html";
+});
+
+document.getElementById("submitReflection").addEventListener("click", () => {
+  window.location.href = "advice.html";
+});
+// document.getElementById("Complete").addEventListener("click", () => {
+//   window.location.href = "question.html";
+// });
+
+// document.getElementById("stop").addEventListener("click", () => {
+// });
