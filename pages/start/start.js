@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Check session state when the extension is opened
   chrome.runtime.sendMessage({ type: 'checkSessionState' }, (response) => {
-    if (response.isRunning) {
+    // Redirect if there's an active session, even if timer isn't running
+    if (response && response.hasActiveSession) {
       // Redirect to ongoing.html if a session is active
       window.location.href = '../ongoing/ongoing.html';
     }

@@ -3,6 +3,8 @@ let timerData = {
   remainingTime: 0,
   intervalId: null,
   sessionName: '',
+  reflections: [], // Store reflections for the session
+  hasActiveSession: false // Track if session is active regardless of timer
 };
 
 // Load session state from storage when the background script starts
@@ -24,6 +26,8 @@ function saveSessionState() {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'initializeSession') {
     timerData.sessionName = message.sessionName;
+    timerData.reflections = []; // Reset reflections for the new session
+    timerData.hasActiveSession = true; // Mark session as active
     saveSessionState();
     sendResponse({ status: `Session "${message.sessionName}" initialized` });
   } else if (message.type === 'startTimer') {
@@ -45,7 +49,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   } else if (message.type === 'getTimerStatus') {
     sendResponse(timerData);
   } else if (message.type === 'checkSessionState') {
-    sendResponse({ isRunning: timerData.isRunning });
+    sendResponse({ 
+      isRunning: timerData.isRunning,
+      hasActiveSession: timerData.hasActiveSession 
+    });
+  } else if (message.type === 'saveReflection') {
+    timerData.reflections.push(message.reflection); // Save the reflection
+    saveSessionState();
+    sendResponse({ status: 'Reflection saved' });
   }
 });
 
@@ -61,6 +72,8 @@ function startTimer(duration) {
     if (timerData.remainingTime <= 0) {
       clearInterval(timerData.intervalId);
       timerData.isRunning = false;
+      // Session is still active even when timer ends
+      timerData.hasActiveSession = true;
 
       // Notify the user and open the reflection page
       chrome.notifications.create({
@@ -106,6 +119,8 @@ function stopSession() {
     remainingTime: 0,
     intervalId: null,
     sessionName: '',
+    reflections: [],
+    hasActiveSession: false // Reset the active session flag
   };
   chrome.storage.local.remove('timerData'); // Clear session data from storage
 }
