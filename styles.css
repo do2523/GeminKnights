@@ -1,0 +1,289 @@
+/* --- FocusForge Orange Theme ------------------------------------------- */
+:root {
+  --accent-orange: #ff8c3b; /* primary action / progress */
+  --accent-orange-dark: #c04e10; /* hover / shadows           */
+  --bg-gradient-start: #291640; /* upper-left background     */
+  --bg-gradient-end: #140a28; /* lower-right background    */
+  --text-light: #fff5e6; /* headings / body copy      */
+  --end-button-color: #ff0000; /* end session button color  */
+}
+
+/* ----------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  font-family: "Yatra One", Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* new gradient */
+  background: linear-gradient(
+    135deg,
+    var(--bg-gradient-start) 0%,
+    var(--bg-gradient-end) 100%
+  );
+  color: var(--text-light);
+}
+
+/* card-like popup frame -------------------------------------------------- */
+.container {
+  width: 300px;
+  padding: 24px;
+  text-align: center;
+  border-radius: 20px;
+
+  /* translucent glassy panel */
+  background: rgba(20, 13, 40, 0.6);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* header ---------------------------------------------------------------- */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  margin-right: 12px;
+}
+
+/* timer ----------------------------------------------------------------- */
+.timer-section {
+  position: relative;
+  margin: 24px 0;
+  margin-top: 50px;
+}
+
+.circle {
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
+
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle at 30% 30%,
+    var(--accent-orange) 0%,
+    var(--accent-orange-dark) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#time-display {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+/* slider ---------------------------------------------------------------- */
+#time-slider {
+  width: 100%;
+  accent-color: var(--accent-orange);
+  margin-top: 90px; /* Chrome / Edge */
+}
+
+/* input ----------------------------------------------------------------- */
+#session-name {
+  width: 80%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 20px;
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
+  margin-bottom: 30px;
+}
+
+/* primary button section ------------------------------------------------ */
+.button-section {
+  margin-top: 10px;
+  display: flex; /* Use flexbox for alignment */
+  justify-content: center; /* Center the buttons */
+  gap: 10px; /* Add spacing between buttons */
+}
+
+#start-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 120ms ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+#end-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+  background: var(--accent-orange);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 120ms ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#start-button:hover {
+  background: var(--accent-orange-dark);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+#end-button:hover {
+  background: var(--end-button-color);
+  color: #fff; /* Ensure text is readable */
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Timer controls styling */
+.timer-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.timer-controls button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 120ms ease-in-out;
+}
+
+.timer-controls button:hover {
+  background: var(--accent-orange-dark);
+}
+
+/* Reflect Section Styling */
+.reflect-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reflect-sign {
+  padding: 12px 24px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  background: var(--accent-orange-dark); /* Always dark orange */
+  color: var(--text-light);
+}
+
+#reflect-input {
+  width: 100%;
+  height: 120px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  background: var(--bg-gradient-start);
+  color: var(--text-light);
+  resize: none;
+  text-align: left;
+}
+
+.reflect-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 120ms ease-in-out;
+}
+
+.reflect-button:hover {
+  background: var(--accent-orange-dark);
+}
+
+/* Start Section Styling */
+.start-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the input field */
+  gap: 20px;
+}
+
+.start-input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  text-align: center;
+  background: var(--accent-orange);
+  color: var(--text-light);
+}
+
+.start-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 120ms ease-in-out;
+}
+
+.start-button:hover {
+  background: var(--accent-orange-dark);
+}
+
+/* Highlight FocusForge in the header */
+.focusforge-highlight {
+  color: var(--accent-orange-dark); /* Dark orange color */
+  font-weight: bold;
+}
+
+/* Reflection List Styling */
+.reflection-list {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 16px;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  text-align: left;
+  overflow-y: auto; /* Add scroll if content exceeds height */
+}
+
+.reflection-item {
+  margin-bottom: 10px;
+}

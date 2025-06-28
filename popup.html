@@ -2,23 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Productivity Tracker</title>
+  <title>FocusForge</title>
+  <!-- point at your shared stylesheet -->
+  <link rel="stylesheet" href="styles.css">
   <style>
     .page { display: none; }
     .active { display: block; }
   </style>
 </head>
 <body>
-  <!-- Page 1: Welcome (with timer) -->
-  <div id="mainPage" class="page active">
-    <h1>Welcome</h1>
-    <button id="start">Start Session</button>
-    <button id="endSessionMain">End Session</button>
+  <div class="container">
+    <!-- Page 1: Start Session UI merged in -->
+    <div id="mainPage" class="page active">
+      <div class="header">
+        <img src="resources/hello_extensions.png" alt="FocusForge Logo" class="logo">
+        <h1>Welcome to <span class="focusforge-highlight">FocusForge</span></h1>
+      </div>
+      <div class="start-section">
+        <input
+          type="text"
+          id="session-name"
+          placeholder="Name your session"
+          class="start-input"
+        />
+        <button id="start-session-button" class="start-button">
+          Start Session
+        </button>
+        <button id="endSessionMain" class="end-button">
+          End Session
+        </button>
+      </div>
+    </div>
   </div>
 
   <!-- Page 2: Timer -->
   <div id="timerPage" class="page">
     <h1>Timer Running</h1>
+    <p>Remaining: <span id="timer">--:--</span></p>
     <button id="complete">Timer Done</button>
     <button id="endSessionTimer">End Session</button>
   </div>
