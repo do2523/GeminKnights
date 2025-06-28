@@ -1,56 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
   const slider = document.getElementById('time-slider');
   const timeDisplay = document.getElementById('time-display');
-  const startStopButton = document.getElementById('start-stop-button');
-  const resetButton = document.getElementById('reset-button');
-  const sessionNameInput = document.getElementById('session-name');
   const startButton = document.getElementById('start-button');
+  const resetButton = document.getElementById('reset-button');
+  const endButton = document.getElementById('end-button');
 
-  let countdownInterval;
-  let isTimerRunning = false;
-  let remainingTime;
+  let timerDuration = parseInt(slider.value, 10) * 60;
+
+  // Check timer status when the page loads
+  chrome.runtime.sendMessage({ type: 'getTimerStatus' }, (response) => {
+    if (response) {
+      const minutes = Math.floor(response.remainingTime / 60);
+      const seconds = response.remainingTime % 60;
+      timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      slider.value = Math.ceil(response.remainingTime / 60);
+      timerDuration = response.remainingTime;
+    }
+  });
 
   // Update the timer display when the slider value changes
   slider.addEventListener('input', () => {
     const minutes = slider.value;
     timeDisplay.textContent = `${minutes} min`;
-    remainingTime = parseInt(slider.value, 10) * 60; // Update remaining time
+    timerDuration = parseInt(slider.value, 10) * 60;
   });
 
-  // Start/Stop Timer functionality
+  // Start the timer
   startButton.addEventListener('click', () => {
-    if (isTimerRunning) {
-      clearInterval(countdownInterval);
-      isTimerRunning = false;
-      startButton.textContent = 'Start Timer';
-    } else {
-      if (!remainingTime) {
-        remainingTime = parseInt(slider.value, 10) * 60; // Initialize remaining time
+    chrome.runtime.sendMessage({ type: 'startTimer', duration: timerDuration }, (response) => {
+      if (response && response.status) {
+        console.log(response.status);
+      } else {
+        console.error('Failed to start timer.');
       }
-      countdownInterval = setInterval(() => {
-        if (remainingTime <= 0) {
-          clearInterval(countdownInterval);
-          alert('Timer completed!');
-          isTimerRunning = false;
-          startButton.textContent = 'Start Timer';
-        } else {
-          remainingTime--;
-          const minutes = Math.floor(remainingTime / 60);
-          const seconds = remainingTime % 60;
-          timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-      }, 1000);
-      isTimerRunning = true;
-     startButton.textContent = 'Pause Timer';
-    }
+    });
   });
 
-  // Reset Session functionality
+  // Reset the timer
   resetButton.addEventListener('click', () => {
-    clearInterval(countdownInterval);
-    isTimerRunning = false;
-    startButton.textContent = 'Start Timer';
-    remainingTime = parseInt(slider.value, 10) * 60; // Reset remaining time
-    timeDisplay.textContent = `${slider.value} min`;
+    chrome.runtime.sendMessage({ type: 'resetTimer', duration: timerDuration }, (response) => {
+      if (response && response.status) {
+        console.log(response.status);
+        timeDisplay.textContent = `${slider.value} min`;
+      } else {
+        console.error('Failed to reset timer.');
+      }
+    });
   });
+
+  // Stop the session
+  endButton.addEventListener('click', () => {
+    chrome.runtime.sendMessage({ type: 'stopSession' }, (response) => {
+      if (response && response.status) {
+        console.log(response.status);
+        window.location.href = '../start/Start.html'; // Redirect to the start page
+      } else {
+        console.error('Failed to stop session.');
+      }
+    });
+  });
+
+  // Periodically check timer status
+  setInterval(() => {
+    chrome.runtime.sendMessage({ type: 'getTimerStatus' }, (response) => {
+      if (response) {
+        const minutes = Math.floor(response.remainingTime / 60);
+        const seconds = response.remainingTime % 60;
+        timeDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      }
+    });
+  }, 1000);
 });
