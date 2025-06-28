@@ -121,3 +121,27 @@ body {
 #start-button:hover {
   background: var(--accent-orange-dark);
 }
+
+/* Timer controls styling */
+.timer-controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.timer-controls button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 120ms ease-in-out;
+}
+
+.timer-controls button:hover {
+  background: var(--accent-orange-dark);
+}
