@@ -88,7 +88,7 @@ body {
 #time-slider {
   width: 100%;
   accent-color: var(--accent-orange);
-  margin-top: 70px;      /* Chrome / Edge */
+  margin-top: 90px;      /* Chrome / Edge */
 }
 
 /* input ----------------------------------------------------------------- */
@@ -101,11 +101,12 @@ body {
 
   background: rgba(255, 255, 255, 0.08);
   color: var(--text-light);
+  margin-bottom: 30px;
 }
 
 /* primary button section ------------------------------------------------ */
 .button-section {
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex; /* Use flexbox for alignment */
   justify-content: center; /* Center the buttons */
   gap: 10px; /* Add spacing between buttons */
@@ -114,7 +115,7 @@ body {
 #start-button {
   padding: 12px 24px;
   border: none;
-  border-radius: 20px;
+  border-radius: 15px;
   font-size: 16px;
   font-weight: 600;
   background: var(--accent-orange);
@@ -128,9 +129,10 @@ body {
 #end-button {
   padding: 12px 24px;
   border: none;
-  border-radius: 20px;
+  border-radius: 15px;
   font-size: 16px;
   font-weight: 600;
+  font-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
   background: var(--accent-orange);
   color: var(--text-light);
   cursor: pointer;
@@ -170,5 +172,52 @@ body {
 }
 
 .timer-controls button:hover {
+  background: var(--accent-orange-dark);
+}
+
+/* Reflect Section Styling */
+.reflect-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reflect-sign {
+  padding: 12px 24px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  background: var(--accent-orange-dark); /* Always dark orange */
+  color: var(--text-light);
+}
+
+#reflect-input {
+  width: 100%;
+  height: 120px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  background: var(--bg-gradient-start);
+  color: var(--text-light);
+  resize: none;
+  text-align: left;
+}
+
+.reflect-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 120ms ease-in-out;
+}
+
+.reflect-button:hover {
   background: var(--accent-orange-dark);
 }
