@@ -132,7 +132,7 @@ body {
   border-radius: 15px;
   font-size: 16px;
   font-weight: 600;
-  font-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
   background: var(--accent-orange);
   color: var(--text-light);
   cursor: pointer;
@@ -220,4 +220,63 @@ body {
 
 .reflect-button:hover {
   background: var(--accent-orange-dark);
+}
+
+/* Start Section Styling */
+.start-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the input field */
+  gap: 20px;
+}
+
+.start-input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  text-align: center;
+  background: var(--accent-orange);
+  color: var(--text-light);
+}
+
+.start-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 120ms ease-in-out;
+}
+
+.start-button:hover {
+  background: var(--accent-orange-dark);
+}
+
+/* Highlight FocusForge in the header */
+.focusforge-highlight {
+  color: var(--accent-orange-dark); /* Dark orange color */
+  font-weight: bold;
+}
+
+/* Reflection List Styling */
+.reflection-list {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 16px;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  text-align: left;
+  overflow-y: auto; /* Add scroll if content exceeds height */
+}
+
+.reflection-item {
+  margin-bottom: 10px;
 }
