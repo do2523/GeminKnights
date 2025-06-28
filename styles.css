@@ -5,6 +5,7 @@
   --bg-gradient-start:   #291640;   /* upper-left background     */
   --bg-gradient-end:     #140A28;   /* lower-right background    */
   --text-light:          #FFF5E6;   /* headings / body copy      */
+  --end-button-color:   #ff0000;   /* end session button color  */
 }
 
 /* ----------------------------------------------------------------------- */
@@ -102,24 +103,50 @@ body {
   color: var(--text-light);
 }
 
-/* primary button -------------------------------------------------------- */
-#start-button {
+/* primary button section ------------------------------------------------ */
+.button-section {
   margin-top: 20px;
-  padding: 12px 24px;
+  display: flex; /* Use flexbox for alignment */
+  justify-content: center; /* Center the buttons */
+  gap: 10px; /* Add spacing between buttons */
+}
 
+#start-button {
+  padding: 12px 24px;
   border: none;
   border-radius: 20px;
   font-size: 16px;
   font-weight: 600;
-
   background: var(--accent-orange);
   color: var(--text-light);
   cursor: pointer;
   transition: background 120ms ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+#end-button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--accent-orange);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 120ms ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 #start-button:hover {
   background: var(--accent-orange-dark);
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+#end-button:hover {
+  background: var(--end-button-color);
+  color: #fff; /* Ensure text is readable */
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 /* Timer controls styling */
