@@ -7,6 +7,9 @@ let timerData = {
   hasActiveSession: false // Track if session is active regardless of timer
 };
 
+// Add this at the top with your other variables
+let completedSessions = [];
+
 // Load session state from storage when the background script starts
 chrome.storage.local.get(['timerData'], (result) => {
   if (result.timerData) {
@@ -17,9 +20,21 @@ chrome.storage.local.get(['timerData'], (result) => {
   }
 });
 
+// Load completed sessions from storage when the background script starts
+chrome.storage.local.get(['completedSessions'], (result) => {
+  if (result.completedSessions) {
+    completedSessions = result.completedSessions;
+  }
+});
+
 // Save session state to storage
 function saveSessionState() {
   chrome.storage.local.set({ timerData });
+}
+
+// Add this function to save completed sessions
+function saveCompletedSessions() {
+  chrome.storage.local.set({ completedSessions });
 }
 
 // Listen for messages from the popup
@@ -57,6 +72,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     timerData.reflections.push(message.reflection); // Save the reflection
     saveSessionState();
     sendResponse({ status: 'Reflection saved' });
+  } else if (message.type === 'getCompletedSessions') {
+    sendResponse({ completedSessions });
   }
 });
 
@@ -114,13 +131,33 @@ function resetTimer(duration) {
 // Stop the session
 function stopSession() {
   clearInterval(timerData.intervalId);
+  
+  // Save the current session data before clearing it
+  if (timerData.sessionName && timerData.reflections.length > 0) {
+    // Create a completed session object
+    const completedSession = {
+      sessionName: timerData.sessionName,
+      reflections: timerData.reflections,
+      timestamp: new Date().toISOString()
+    };
+    
+    // Add to completed sessions array
+    completedSessions.push(completedSession);
+    saveCompletedSessions();
+    
+    // Optional: Log to console so you can verify data is saved
+    console.log("Session saved:", completedSession);
+  }
+  
+  // Reset timer data
   timerData = {
     isRunning: false,
     remainingTime: 0,
     intervalId: null,
     sessionName: '',
     reflections: [],
-    hasActiveSession: false // Reset the active session flag
+    hasActiveSession: false
   };
-  chrome.storage.local.remove('timerData'); // Clear session data from storage
+  
+  chrome.storage.local.remove('timerData');
 }
