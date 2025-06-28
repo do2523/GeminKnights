@@ -2,26 +2,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const reflectionList = document.getElementById('reflection-list');
   const continueButton = document.getElementById('continue-button');
 
-  // Example reflections (replace with dynamic data from storage or API)
-  const reflections = [
-    'Reflection 1: Completed task A.',
-    'Reflection 2: Worked on project B.',
-    'Reflection 3: Researched topic C.',
-    'Reflection 4: Brainstormed ideas for D.',
-    'Reflection 5: Reviewed progress on E.'
-  ];
-
-  // Dynamically populate reflections
-  reflections.forEach((reflection) => {
-    const reflectionItem = document.createElement('div');
-    reflectionItem.className = 'reflection-item';
-    reflectionItem.textContent = reflection;
-    reflectionList.appendChild(reflectionItem);
+  // Get the reflections from the current session
+  chrome.runtime.sendMessage({ type: 'getTimerStatus' }, (response) => {
+    if (response && response.reflections && response.reflections.length > 0) {
+      // Dynamically populate reflections
+      response.reflections.forEach((reflection, index) => {
+        const reflectionItem = document.createElement('div');
+        reflectionItem.className = 'reflection-item';
+        reflectionItem.textContent = `Reflection ${index + 1}: ${reflection}`;
+        reflectionList.appendChild(reflectionItem);
+      });
+    } else {
+      // No reflections found
+      const noReflections = document.createElement('div');
+      noReflections.className = 'reflection-item';
+      noReflections.textContent = 'No reflections found for this session.';
+      reflectionList.appendChild(noReflections);
+    }
   });
 
   // Add functionality to the Continue button
   continueButton.addEventListener('click', () => {
-    alert('Continuing to the next step...');
-    // Add logic for redirecting or proceeding to the next page
+    // Close the final reflection window
+    window.close();
   });
 });
