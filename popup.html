@@ -9,29 +9,32 @@
   </style>
 </head>
 <body>
-  <!-- Page 1: Welcome -->
+  <!-- Page 1: Welcome (with timer) -->
   <div id="mainPage" class="page active">
     <h1>Welcome</h1>
     <button id="start">Start Session</button>
+    <button id="endSessionMain">End Session</button>
   </div>
 
   <!-- Page 2: Timer -->
   <div id="timerPage" class="page">
     <h1>Timer Running</h1>
     <button id="complete">Timer Done</button>
+    <button id="endSessionTimer">End Session</button>
   </div>
 
   <!-- Page 3: Question -->
   <div id="questionPage" class="page">
     <h1>What did you do?</h1>
     <input type="text" id="userResponse" placeholder="Type your response" />
-    <button id="done">Finish</button>
+    <button id="submit">Submit</button>
+    <button id="endSession">End Session</button>
   </div>
 
   <!-- Page 4: Final Report -->
   <div id="summaryPage" class="page">
-    <h1>Summary</h1>
-    <p id="summaryText"></p>
+    <h1>Report</h1>
+    <pre id="summaryText"></pre>
     <button id="reset">New Session</button>
   </div>
 

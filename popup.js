@@ -8,7 +8,9 @@ function showPage(id) {
 const startBtn = document.getElementById("start");
 if (startBtn) {
   startBtn.addEventListener("click", () => {
-    showPage("timerPage");
+    chrome.storage.local.set({ responses: [] }, () => {
+      showPage("timerPage");
+    });
   });
 }
 
@@ -19,20 +21,63 @@ if (completeBtn) {
   });
 }
 
-const doneBtn = document.getElementById("done");
-if (doneBtn) {
-  doneBtn.addEventListener("click", () => {
-    const response = document.getElementById("userResponse").value;
-    document.getElementById("summaryText").innerText = `You said: "${response}"`;
+// NEW: Submit only adds to array
+const submitBtn = document.getElementById("submit");
+if (submitBtn) {
+  submitBtn.addEventListener("click", () => {
+    const response = document.getElementById("userResponse").value.trim();
+    if (!response) return;
+
+    chrome.storage.local.get({ responses: [] }, (data) => {
+      const updated = [...data.responses, response];
+      chrome.storage.local.set({ responses: updated }, () => {
+        document.getElementById("userResponse").value = "";
+        showPage("timerPage"); 
+      });
+    });
+  });
+}
+
+// NEW: End Session shows all responses
+const endSessionBtn = document.getElementById("endSession");
+const endSessionMainBtn = document.getElementById("endSessionMain");
+const endSessionTimerBtn = document.getElementById("endSessionTimer");
+function showSummaryPage() {
+  chrome.storage.local.get({ responses: [] }, (data) => {
+    const summary = data.responses.map((text, i) => `[${i + 1}] ${text}`).join("\n\n");
+    document.getElementById("summaryText").innerText = summary;
     showPage("summaryPage");
   });
 }
+if (endSessionBtn) {
+  endSessionBtn.addEventListener("click", showSummaryPage);
+}
+if (endSessionMainBtn) {
+  endSessionMainBtn.addEventListener("click", showSummaryPage);
+}
+if (endSessionTimerBtn) {
+  endSessionTimerBtn.addEventListener("click", showSummaryPage);
+}
+
+// if (endSessionBtn) {
+//   endSessionBtn.addEventListener("click", () => {
+//     chrome.storage.local.get({ responses: [] }, (data) => {
+//       const summary = data.responses
+//         .map((text, i) => `${text}`)
+//         .join("\n\n");
+//       document.getElementById("summaryText").innerText = summary;
+//       showPage("summaryPage");
+//     });
+//   });
+// }
 
 const resetBtn = document.getElementById("reset");
 if (resetBtn) {
   resetBtn.addEventListener("click", () => {
-    document.getElementById("userResponse").value = "";
-    document.getElementById("summaryText").innerText = "";
-    showPage("mainPage");
+    chrome.storage.local.set({ responses: [] }, () => {
+      document.getElementById("userResponse").value = "";
+      document.getElementById("summaryText").innerText = "";
+      showPage("mainPage");
+    });
   });
 }
