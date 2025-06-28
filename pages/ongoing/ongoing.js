@@ -48,25 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Stop the session
+  // Stop the session button handler
   endButton.addEventListener('click', () => {
-    // First open finalreflection.html
+    // Just open finalreflection.html - don't end session yet
     chrome.windows.create({
-      url: '../finalreflection/finalreflection.html',
+      url: chrome.runtime.getURL('pages/finalreflection/finalreflection.html'),
       type: 'popup',
       width: 400,
       height: 600,
-    }, () => {
-      // Then stop the session after user reviews reflections
-      chrome.runtime.sendMessage({ type: 'stopSession' }, (response) => {
-        if (response && response.status) {
-          console.log(response.status);
-          window.location.href = '../start/Start.html'; // Redirect to the start page
-        } else {
-          console.error('Failed to stop session.');
-        }
-      });
     });
+    
+    // Session will be ended when user clicks Continue in finalreflection.html
   });
 
   // Periodically check timer status

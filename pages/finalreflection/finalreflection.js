@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const reflectionList = document.getElementById('reflection-list');
   const continueButton = document.getElementById('continue-button');
 
-  // Get the reflections from the current session
+  // Get the current active session reflections
   chrome.runtime.sendMessage({ type: 'getTimerStatus' }, (response) => {
     if (response && response.reflections && response.reflections.length > 0) {
       // Dynamically populate reflections
@@ -23,7 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add functionality to the Continue button
   continueButton.addEventListener('click', () => {
-    // Close the final reflection window
-    window.close();
+    // Now stop the session after viewing reflections
+    chrome.runtime.sendMessage({ type: 'stopSession' }, (response) => {
+      if (response && response.status) {
+        console.log(response.status);
+        // Close the window
+        window.close();
+      } else {
+        console.error('Failed to stop session.');
+      }
+    });
   });
 });
