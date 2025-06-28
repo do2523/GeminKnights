@@ -1,6 +1,32 @@
-<html>
-  <body>
-    <h1>Hello Extensions</h1>
-    <script src="popup.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FocusForge</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="resources/hello_extension.png" alt="FocusForge Logo" class="logo">
+      <h1>FocusForge</h1>
+    </div>
+    <div class="timer-section">
+      <div class="slider-container">
+        <input type="range" id="time-slider" min="1" max="60" value="15">
+        <div class="circle">
+          <span id="time-display">15 min</span>
+        </div>
+      </div>
+    </div>
+    <div class="input-section">
+      <input type="text" id="session-name" placeholder="Name your session">
+    </div>
+    <div class="button-section">
+      <button id="start-button">Start</button>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
 </html>
