@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const startStopButton = document.getElementById('start-stop-button');
   const resetButton = document.getElementById('reset-button');
   const sessionNameInput = document.getElementById('session-name');
+  const startButton = document.getElementById('start-button');
 
   let countdownInterval;
   let isTimerRunning = false;
@@ -17,11 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Start/Stop Timer functionality
-  startStopButton.addEventListener('click', () => {
+  startButton.addEventListener('click', () => {
     if (isTimerRunning) {
       clearInterval(countdownInterval);
       isTimerRunning = false;
-      startStopButton.textContent = 'Start Timer';
+      startButton.textContent = 'Start Timer';
     } else {
       if (!remainingTime) {
         remainingTime = parseInt(slider.value, 10) * 60; // Initialize remaining time
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
           clearInterval(countdownInterval);
           alert('Timer completed!');
           isTimerRunning = false;
-          startStopButton.textContent = 'Start Timer';
+          startButton.textContent = 'Start Timer';
         } else {
           remainingTime--;
           const minutes = Math.floor(remainingTime / 60);
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }, 1000);
       isTimerRunning = true;
-      startStopButton.textContent = 'Stop Timer';
+     startButton.textContent = 'Pause Timer';
     }
   });
 
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   resetButton.addEventListener('click', () => {
     clearInterval(countdownInterval);
     isTimerRunning = false;
-    startStopButton.textContent = 'Start Timer';
+    startButton.textContent = 'Start Timer';
     remainingTime = parseInt(slider.value, 10) * 60; // Reset remaining time
     timeDisplay.textContent = `${slider.value} min`;
   });
