@@ -55,7 +55,10 @@ body {
 }
 
 /* timer ----------------------------------------------------------------- */
-.timer-section { position: relative; margin: 24px 0; }
+.timer-section { 
+  position: relative; margin: 24px 0;
+  margin-top: 50px;
+}
 
 .circle {
   position: absolute;
@@ -83,7 +86,8 @@ body {
 /* slider ---------------------------------------------------------------- */
 #time-slider {
   width: 100%;
-  accent-color: var(--accent-orange);      /* Chrome / Edge */
+  accent-color: var(--accent-orange);
+  margin-top: 70px;      /* Chrome / Edge */
 }
 
 /* input ----------------------------------------------------------------- */
