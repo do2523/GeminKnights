@@ -1,21 +1,38 @@
-document.getElementById("start").addEventListener("click", () => {
-  window.location.href = "timer.html";
-});
+function showPage(id) {
+  document.querySelectorAll(".page").forEach((page) => {
+    page.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+}
 
-document.getElementById("endSession").addEventListener("click", () => {
-  window.location.href = "report.html";
-});
+const startBtn = document.getElementById("start");
+if (startBtn) {
+  startBtn.addEventListener("click", () => {
+    showPage("timerPage");
+  });
+}
 
-document.getElementById("reflection").addEventListener("click", () => {
-  window.location.href = "reflection.html";
-});
+const completeBtn = document.getElementById("complete");
+if (completeBtn) {
+  completeBtn.addEventListener("click", () => {
+    showPage("questionPage");
+  });
+}
 
-document.getElementById("submitReflection").addEventListener("click", () => {
-  window.location.href = "advice.html";
-});
-// document.getElementById("Complete").addEventListener("click", () => {
-//   window.location.href = "question.html";
-// });
+const doneBtn = document.getElementById("done");
+if (doneBtn) {
+  doneBtn.addEventListener("click", () => {
+    const response = document.getElementById("userResponse").value;
+    document.getElementById("summaryText").innerText = `You said: "${response}"`;
+    showPage("summaryPage");
+  });
+}
 
-// document.getElementById("stop").addEventListener("click", () => {
-// });
+const resetBtn = document.getElementById("reset");
+if (resetBtn) {
+  resetBtn.addEventListener("click", () => {
+    document.getElementById("userResponse").value = "";
+    document.getElementById("summaryText").innerText = "";
+    showPage("mainPage");
+  });
+}
