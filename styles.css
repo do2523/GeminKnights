@@ -1,94 +1,119 @@
+/* --- FocusForge Orange Theme ------------------------------------------- */
+:root {
+  --accent-orange:       #FF8C3B;   /* primary action / progress */
+  --accent-orange-dark:  #C04E10;   /* hover / shadows           */
+  --bg-gradient-start:   #291640;   /* upper-left background     */
+  --bg-gradient-end:     #140A28;   /* lower-right background    */
+  --text-light:          #FFF5E6;   /* headings / body copy      */
+}
+
+/* ----------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  font-family: "Yatra One", Arial, sans-serif;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #4A007E;
-  color: white;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+
+  /* new gradient */
+  background: linear-gradient(135deg,
+              var(--bg-gradient-start) 0%,
+              var(--bg-gradient-end) 100%);
+  color: var(--text-light);
 }
 
+/* card-like popup frame -------------------------------------------------- */
 .container {
-  text-align: center;
   width: 300px;
-  background-color: #6A00A0;
+  padding: 24px;
+  text-align: center;
   border-radius: 20px;
-  padding: 20px;
+
+  /* translucent glassy panel */
+  background: rgba(20, 13, 40, 0.6);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
+/* header ---------------------------------------------------------------- */
 .header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .logo {
   width: 80px;
   height: 80px;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
-.timer-section {
-  position: relative;
-  margin: 20px 0;
-}
-
-.slider-container {
-  position: relative;
-}
-
-#time-slider {
-  width: 100%;
-  margin: 0;
-}
+/* timer ----------------------------------------------------------------- */
+.timer-section { position: relative; margin: 24px 0; }
 
 .circle {
-  width: 100px;
-  height: 100px;
-  background-color: #FF6F00;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
   position: absolute;
   top: -50px;
   left: calc(50% - 50px);
+
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+
+  background: radial-gradient(circle at 30% 30%,
+              var(--accent-orange) 0%,
+              var(--accent-orange-dark) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #time-display {
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-light);
 }
 
-.input-section {
-  margin: 20px 0;
+/* slider ---------------------------------------------------------------- */
+#time-slider {
+  width: 100%;
+  accent-color: var(--accent-orange);      /* Chrome / Edge */
 }
 
+/* input ----------------------------------------------------------------- */
 #session-name {
   width: 80%;
-  padding: 10px;
+  padding: 10px 12px;
   border: none;
   border-radius: 20px;
   text-align: center;
+
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-light);
 }
 
-.button-section {
-  margin-top: 20px;
-}
-
+/* primary button -------------------------------------------------------- */
 #start-button {
-  background-color: #FF6F00;
-  color: white;
+  margin-top: 20px;
+  padding: 12px 24px;
+
   border: none;
   border-radius: 20px;
-  padding: 10px 20px;
   font-size: 16px;
+  font-weight: 600;
+
+  background: var(--accent-orange);
+  color: var(--text-light);
   cursor: pointer;
+  transition: background 120ms ease-in-out;
 }
 
 #start-button:hover {
-  background-color: #FF8F00;
+  background: var(--accent-orange-dark);
 }
