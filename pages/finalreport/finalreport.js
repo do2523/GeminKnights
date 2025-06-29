@@ -24,16 +24,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Add functionality to the Continue button
   continueButton.addEventListener("click", () => {
-    // Now stop the session after viewing reflections
-    chrome.runtime.sendMessage({ type: "stopSession" }, (response) => {
-      if (response && response.status) {
-        console.log(response.status);
-        // Close the window
-        window.close();
-      } else {
-        console.error("Failed to stop session.");
+    // Create the gemini-questions window BEFORE closing this one
+    chrome.windows.create(
+      {
+        url: chrome.runtime.getURL(
+          "pages/gemini-questions/gemini-questions.html"
+        ),
+        type: "popup",
+        width: 400,
+        height: 600,
+      },
+      (newWindow) => {
+        console.log("Created gemini-questions window:", newWindow);
+
+        // Close the current finalreport window
+        chrome.windows.getCurrent((currentWindow) => {
+          chrome.windows.remove(currentWindow.id);
+        });
       }
-    });
+    );
   });
 });
 
