@@ -193,7 +193,7 @@ body {
   color: var(--text-light);
 }
 
-#reflect-input {
+#reflect-input, #gemini-answer {
   width: 100%;
   height: 120px;
   padding: 10px;
@@ -279,4 +279,63 @@ body {
 
 .reflection-item {
   margin-bottom: 10px;
+}
+
+/* ─────────────────────────────────────────────────────── */
+/*  Reflect‐Card Overrides (for <section class="container reflect-card">) */
+/* ─────────────────────────────────────────────────────── */
+:root {
+  /* new “reflect” palette */
+  /* --reflect-bg:        #7E3BF2;   */
+  --reflect-header-bg: #5C1F8A;  /* darker pill bar         */
+  --reflect-input-bg:  #D28B6E;  /* brownish textarea fill  */
+}
+
+/* widen & recolor just this card */
+
+
+/* all labels become orange pills */
+.reflect-card label {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 16px;
+  background: var(--accent-orange-dark);
+  color: var(--text-light);
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* big, rounded, filled textareas */
+.reflect-card .reflect-answer {
+  width: 100%;
+  min-height: 100px;
+  margin-top: 8px;
+  padding: 12px;
+  border: none;
+  border-radius: 20px;
+  background: var(--reflect-input-bg);
+  color: var(--text-light);
+  resize: vertical;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* counter right-aligned beneath inputs */
+.reflect-card .reflect-counter {
+  display: block;
+  text-align: right;
+  margin-top: 8px;
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+/* right-align and space out the buttons */
+.reflect-card .button-section {
+  margin-top: 24px;
+  gap: 12px;
+}
+
+#submit-button {
+  width: 100%;
 }
