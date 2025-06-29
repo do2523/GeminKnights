@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FocusForge - Final Reflections</title>
-  <link rel="stylesheet" href="../../styles.css">
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <img src="../../resources/hello_extensions.png" alt="FocusForge Logo" class="logo">
-      <h1>FocusForge</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FocusForge - Final Reflections</title>
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <img
+          src="../../resources/hello_extensions.png"
+          alt="FocusForge Logo"
+          class="logo"
+        />
+        <h1>FocusForge</h1>
+      </div>
+      <div class="reflect-section">
+        <div id="reflect-title" class="reflect-sign">Report:</div>
+
+        <textarea id="userInput" rows="4" style="width: 100%"></textarea>
+        <button id="submitBtn">Submit</button>
+        <div id="response"></div>
+
+        <div id="reflection-list" class="reflection-list"></div>
+        <button id="continue-button" class="reflect-button">Continue</button>
+      </div>
     </div>
-    <div class="reflect-section">
-      <div id="reflect-title" class="reflect-sign">Report:</div>
-      <div id="reflection-list" class="reflection-list"></div>
-      <button id="continue-button" class="reflect-button">Continue</button>
-    </div>
-  </div>
-  <script src="finalreport.js"></script>
-</body>
+    <script src="finalreport.js"></script>
+  </body>
 </html>

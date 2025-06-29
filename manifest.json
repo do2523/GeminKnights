@@ -2,6 +2,10 @@
   "name": "FocusForge",
   "description": "Productivity tracking and enhancing extension made for UCF GeminiKnights Hackathon 2025",
   "version": "1.0",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self';"
+  },
+  "host_permissions": ["https://generativelanguage.googleapis.com/*"],
   "manifest_version": 3,
   "action": {
     "default_popup": "pages/start/Start.html",
