@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       response.reflections.forEach((reflection, index) => {
         const reflectionItem = document.createElement('div');
         reflectionItem.className = 'reflection-item';
-        reflectionItem.textContent = `Reflection ${index + 1}: ${reflection}`;
+        reflectionItem.textContent = `Report ${index + 1}: ${reflection}`;
         reflectionList.appendChild(reflectionItem);
       });
     } else {

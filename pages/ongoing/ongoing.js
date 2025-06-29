@@ -50,15 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Stop the session button handler
   endButton.addEventListener('click', () => {
-    // Just open finalreflection.html - don't end session yet
+    // Just open finalreport.html - don't end session yet
     chrome.windows.create({
-      url: chrome.runtime.getURL('pages/finalreflection/finalreflection.html'),
+      url: chrome.runtime.getURL('pages/finalreport/finalreport.html'),
       type: 'popup',
       width: 400,
       height: 600,
     });
     
-    // Session will be ended when user clicks Continue in finalreflection.html
+    // Session will be ended when user clicks Continue in finalreport.html
   });
 
   // Periodically check timer status
